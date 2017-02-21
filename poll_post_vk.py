@@ -24,7 +24,7 @@ for line in f:
         out=vkapi.messages.getHistory(count=1,user_id=line.strip())
         if out[0]==0:
             print("можно отправить")
-            #vkapi.messages.send(user_id=line.strip(), message=(name+', '+MESSAGE))
+            vkapi.messages.send(user_id=line.strip(), message=(name+', '+MESSAGE))
             time.sleep(30)
         else:
             print("Уже писали этому пользователю")
