@@ -28,8 +28,9 @@ for line in f:
             time.sleep(30)
         else:
             print("Уже писали этому пользователю")
+            time.sleep(30)
     i+=1
-    if i>1: break
+    if i>9: break
 f.close()
 
 
