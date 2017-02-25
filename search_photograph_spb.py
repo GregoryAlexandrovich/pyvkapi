@@ -7,24 +7,25 @@ vkapi = vk.API(session)
 #AGE_FROM = 18
 #AGE_TO = 27
 CITY = 2 #SPb
-SEARCH = "фотограф"
-users = vkapi.users.search(q=SEARCH,city=CITY,has_photo=1,sort=0,fields='domain',count=2000)
+SEARCH = "photograph"
+users = vkapi.users.search(q=SEARCH,city=CITY,has_photo=1,sort=0,fields='domain,can_write_private_message',count=2000)
 users_count = users[0]
 print('Кол-во человек: %d'%(users_count))
 users = users[1:]
 #[print(user) for user in users]
 
-file = open('../ph1500.txt','w')
+file = open('../'+SEARCH+'.txt','w')
 i=0
 for user in users:
-    UID=user['uid']
+    UID = user['uid']
+    can = user['can_write_private_message']
     #friends = vkapi.friends.get(user_id=UID)
     #print(len(friends))
-    time.sleep(0.3)
+    time.sleep(0.45)
     #if ((len(friends) >= 1500)and(len(friends)<=3000)):
     out = vkapi.messages.getHistory(count=1, user_id=UID)
     print(out)
-    if out[0] == 0:
+    if out[0] == 0 and can == 1:
        # print("можно отправить")
         file.write(str(UID) + '\n')
         print(UID)
